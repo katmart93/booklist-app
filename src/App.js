@@ -28,14 +28,14 @@ function App() {
       {
         bookTitle: title,
         bookAuthor: author,
-        bookIsbn: isbn,
+        bookIsbn: +isbn,
         bookId: uuidv4(),
       },
     ]);
   };
 
   const isInputInvalid = () => {
-    return title.trim() === "" || author.trim() === "" || isbn.trim() === "";
+    return title.trim() === "" || author.trim() === "" || isbn === null;
   };
 
   const clearInputs = () => {
@@ -47,12 +47,41 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearInputs();
+    setCurrBookId(null);
     if (isInputInvalid()) return;
-    addBook();
+    !currBookId ? addBook() : updateBook();
   };
 
   const removeBook = (id) => {
     setBooks(books.filter((book) => book.bookId !== id));
+  };
+
+  const editBook = (book) => {
+    setTitle(book.bookTitle);
+    setAuthor(book.bookAuthor);
+    setIsbn(book.bookIsbn);
+    setCurrBookId(book.bookId);
+  };
+
+  const updateBook = () => {
+    setBooks(
+      books.map((book) =>
+        book.bookId === currBookId
+          ? {
+              bookTitle: title,
+              bookAuthor: author,
+              bookIsbn: +isbn,
+              bookId: book.bookId,
+            }
+          : book
+      )
+    );
+  };
+  console.log(books);
+
+  const cancelEdit = () => {
+    clearInputs();
+    setCurrBookId(null);
   };
 
   return (
@@ -67,8 +96,9 @@ function App() {
           setIsbn={setIsbn}
           currBookId={currBookId}
           handleSubmit={handleSubmit}
+          cancelEdit={cancelEdit}
         />
-        <Table books={books} removeBook={removeBook} />
+        <Table books={books} removeBook={removeBook} editBook={editBook} />
       </div>
     </div>
   );

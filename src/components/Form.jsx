@@ -9,6 +9,7 @@ export default function Form({
   setIsbn,
   currBookId,
   handleSubmit,
+  cancelEdit,
 }) {
   return (
     <form onSubmit={handleSubmit}>
@@ -40,6 +41,7 @@ export default function Form({
       <button tabIndex="0" type="submit">
         {currBookId !== null ? "Update" : "Add"}
       </button>
+      {currBookId !== null && <button onClick={cancelEdit}>Cancel</button>}
     </form>
   );
 }

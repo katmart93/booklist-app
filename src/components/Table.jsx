@@ -1,7 +1,7 @@
 // components
 import TableField from "./TableField";
 
-export default function Table({ books, removeBook }) {
+export default function Table({ books, removeBook, editBook }) {
   return (
     <div className="table">
       <div className="tableHeading">
@@ -15,9 +15,11 @@ export default function Table({ books, removeBook }) {
           <TableField fieldName={book.bookTitle} />
           <TableField fieldName={book.bookAuthor} />
           <TableField fieldName={book.bookIsbn} />
+          <TableField fieldName={book.bookId} />
           <TableField
             settingsField
             removeBook={() => removeBook(book.bookId)}
+            editBook={() => editBook(book)}
           />
         </div>
       ))}
