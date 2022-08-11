@@ -15,7 +15,7 @@ export default function Table({ books }) {
           <TableField fieldName={book.bookTitle} />
           <TableField fieldName={book.bookAuthor} />
           <TableField fieldName={book.bookIsbn} />
-          <TableField />
+          <TableField settingsField />
         </div>
       ))}
     </div>
