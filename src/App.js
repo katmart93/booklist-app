@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // components
 import Form from "./components/Form";
+import Table from "./components/Table";
 
 // styles
 import "./App.css";
@@ -17,7 +18,7 @@ function App() {
       bookTitle: title,
       bookAuthor: author,
       bookIsbn: isbn,
-      id: uuidv4(),
+      bookId: uuidv4(),
     },
   ]);
 
@@ -33,6 +34,7 @@ function App() {
           setIsbn={setIsbn}
           currBookId={currBookId}
         />
+        <Table books={books} />
       </div>
     </div>
   );
