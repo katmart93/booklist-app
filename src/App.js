@@ -15,12 +15,41 @@ function App() {
   const [currBookId, setCurrBookId] = useState(null);
   const [books, setBooks] = useState([
     {
-      bookTitle: title,
-      bookAuthor: author,
-      bookIsbn: isbn,
+      bookTitle: "Different Seasons",
+      bookAuthor: "Stephen King",
+      bookIsbn: 51546,
       bookId: uuidv4(),
     },
   ]);
+
+  const addBook = () => {
+    setBooks([
+      ...books,
+      {
+        bookTitle: title,
+        bookAuthor: author,
+        bookIsbn: isbn,
+        bookId: uuidv4(),
+      },
+    ]);
+  };
+
+  const isInputInvalid = () => {
+    return title.trim() === "" || author.trim() === "" || isbn.trim() === "";
+  };
+
+  const clearInputs = () => {
+    setTitle("");
+    setAuthor("");
+    setIsbn("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    clearInputs();
+    if (isInputInvalid()) return;
+    addBook();
+  };
 
   return (
     <div className="App">
@@ -33,6 +62,7 @@ function App() {
           isbn={isbn}
           setIsbn={setIsbn}
           currBookId={currBookId}
+          handleSubmit={handleSubmit}
         />
         <Table books={books} />
       </div>

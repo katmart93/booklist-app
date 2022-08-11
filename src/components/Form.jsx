@@ -8,16 +8,17 @@ export default function Form({
   isbn,
   setIsbn,
   currBookId,
+  handleSubmit,
 }) {
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="title">Title</label>
       <input
         type="text"
         id="title"
         name="title"
         value={title}
-        onChange={(e) => setTitle(e.set.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <label htmlFor="author">Author</label>
       <input
